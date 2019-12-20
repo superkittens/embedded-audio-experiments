@@ -134,8 +134,8 @@ int main(void)
   //  Except for the adcQueue.  That queue should contain all the empty buffers
   for (int i = 0; i < QUEUE_SIZE; ++i){
 	  adcQueue[i] = buffer[i];
-      adcQueue[i] = NULL;
-      adcQueue[i] = NULL;
+      processingQueue[i] = NULL;
+      dacQueue[i] = NULL;
   }
 
   adcBufferIndex = 0;
@@ -205,7 +205,7 @@ void ADC0_IRQHandler(){
         transferBufferToQueue(adcQueue[adcQueueHead], processingQueue, &processingQueueTail);
 
         adcQueue[adcQueueHead] = NULL;
-        adcQueueHead = (adcQueueHead += 1) % QUEUE_SIZE;
+        adcQueueHead = (adcQueueHead + 1) % QUEUE_SIZE;
       }
     }
 }
