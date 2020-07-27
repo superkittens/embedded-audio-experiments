@@ -7,10 +7,10 @@
 #include "arm_math.h"
 
 #define NUM_BUFFERS 4
-#define BUFFER_SIZE 256
+#define BUFFER_SIZE 512
 #define QUEUE_SIZE (NUM_BUFFERS)
 
-#define NUM_FILTER_COEFFS 127
+#define NUM_FILTER_COEFFS 9
 
 //  Create buffers
 volatile static float32_t buffer[NUM_BUFFERS][BUFFER_SIZE];
@@ -173,13 +173,14 @@ int filterAudioBlock(float32_t *x, size_t bufferSize, float32_t *h, size_t numFi
   for (size_t i = 0; i < bufferSize; ++i)
   {
     //  Shift audio samples in v and add shift in new audio sample
-    for (size_t j = numFilterCoefficients - 1; j > 1; --j)
+    for (size_t j = numFilterCoefficients - 1; j > 0; --j)
       v[j] = v[j-1];
 
     v[0] = x[i];
 
     //  Multiply and add to get output value
     float32_t output = 0.f;
+
     for (size_t j = 0; j < numFilterCoefficients; ++j)
       output += h[j] * v[j];
 

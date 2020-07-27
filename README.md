@@ -23,6 +23,11 @@ An example that configures the ADC, Timer and DAC to read in an audio sample and
 ### Audio Passthrough with Buffers  
 [Silly Audio Processing 4](https://www.meoworkshop.org/silly-audio-processing-4/)  
 The same as the Audio Passthrough example above but using a system of buffers to create additional processing time.
+
+
+### FIR Low Pass Filter
+[SIlly Audio Processing 5](https://www.meoworkshop.org/silly-audio-processing-5/)
+Implementing a simple time-domain low pass Finite Impulse Response Filter
   
   
 ## Additional Links and Reading Material
@@ -33,3 +38,6 @@ Throughout my embedded audio explorations, I found the following resources helpf
 * [Introduction to Digital Filters](https://ccrma.stanford.edu/~jos/filters/), J.O. Smith 
 * [Physical Audio Signal Processing](https://ccrma.stanford.edu/~jos/pasp/), J.O. Smith
 * [Spectral Audio Signal Processing](https://ccrma.stanford.edu/~jos/sasp/), J.O. Smith
+* Designing Audio Effect Plugins in C++, Will C. Pirkle
+* [The Scientist and Engineer's Guide to Digital Signal Processing](http://dspguide.com), Steven W. Smith
+* [The Audio Programmer](https://theaudioprogrammer.com)
