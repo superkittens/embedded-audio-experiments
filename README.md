@@ -27,6 +27,8 @@ The same as the Audio Passthrough example above but using a system of buffers to
 
 ### FIR Low Pass Filter
 [SIlly Audio Processing 5](https://www.meoworkshop.org/silly-audio-processing-5/)
+
+
 Implementing a simple time-domain low pass Finite Impulse Response Filter
   
   
