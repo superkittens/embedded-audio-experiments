@@ -28,6 +28,12 @@ The same as the Audio Passthrough example above but using a system of buffers to
 ### FIR Low Pass Filter
 [SIlly Audio Processing 5](https://www.meoworkshop.org/silly-audio-processing-5/)  
 Implementing a simple time-domain low pass Finite Impulse Response Filter
+
+
+### Delay Lines and Comb Filters
+[Silly Audio Processing 6](https://www.meoworkshop.org/silly-audio-processing-6/)  
+[Silly Audio Processing 7](https://www.meoworkshop.org/silly-audio-processing-7/)  
+Implementing delay lines and comb filters (feed-forward, feedback and all-pass)
   
   
 ## Additional Links and Reading Material
