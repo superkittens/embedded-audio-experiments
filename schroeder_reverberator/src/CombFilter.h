@@ -39,19 +39,29 @@ typedef struct
 	FBCF *fb;
 }APCF;
 
+typedef struct
+{
+	DelayLine *M;
+	float32_t b0;
+	float32_t am;
+}APCF_T2;
+
 
 
 FFCF		*createFFCF(size_t M, float32_t b0, float32_t bm);
 FBCF		*createFBCF(size_t M, float32_t b0, float32_t am);
 APCF		*createAPCF(size_t M, float32_t b0, float32_t am);
+APCF_T2		*createAPCFT2(size_t M, float32_t b0, float32_t am);
 
 void 		deleteFFCF(FFCF *f);
 void 		deleteFBCF(FBCF *f);
 void 		deleteAPCF(APCF *a);
+void		deleteAPCFT2(APCF_T2 *a);
 
 int 		ffcfShift(FFCF *f, float32_t x, float32_t *y);
 int 		fbcfShift(FBCF *f, float32_t x, float32_t *y);
 int 		apcfShift(APCF *a, float32_t x, float32_t *y);
+int			apcfT2Shift(APCF_T2 *a, float32_t x, float32_t *y);
 
 
 

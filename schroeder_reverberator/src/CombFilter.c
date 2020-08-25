@@ -72,6 +72,26 @@ APCF *createAPCF(size_t M, float32_t b0, float32_t am)
 }
 
 
+APCF_T2 *createAPCFT2(size_t M, float32_t b0, float32_t am)
+{
+	APCF_T2 *a = (APCF_T2 *)malloc(sizeof(APCF_T2));
+	if (a == NULL)
+		return NULL;
+
+	a->M = createDelayLine(M);
+	if (a->M == NULL)
+	{
+		free(a);
+		return NULL;
+	}
+
+	a->b0 = b0;
+	a->am = am;
+
+	return a;
+}
+
+
 void deleteFFCF(FFCF *f)
 {
 	if (f == NULL) return;
@@ -104,6 +124,19 @@ void deleteAPCF(APCF *a)
 	deleteFBCF(a->fb);
 
 	free(a);
+	a = NULL;
+
+	return;
+}
+
+
+void deleteAPCFT2(APCF_T2 *a)
+{
+	if (a == NULL) return;
+
+	deleteDelayLine(a->M);
+	free(a);
+
 	a = NULL;
 
 	return;
@@ -158,6 +191,22 @@ int apcfShift(APCF *a, float32_t x, float32_t *y)
 		return -1;
 
 	*y = d_y;
+
+	return 0;
+}
+
+
+int apcfT2Shift(APCF_T2 *a, float32_t x, float32_t *y)
+{
+	if (a == NULL) return -1;
+
+	float32_t delayOut = 0;
+	delayLinePeek(a->M, &delayOut);
+
+	float32_t v = (delayOut * a->am) + x;
+	*y = (a->b0 * v) + delayOut;
+
+	delayLineShift(a->M, v, &delayOut);
 
 	return 0;
 }
