@@ -39,8 +39,9 @@ Implementing delay lines and comb filters (feed-forward, feedback and all-pass)
 ### Schroeder Reverberator
 [Silly Audio Processing 8](https://www.meoworkshop.org/silly-audio-processing-8/)
 Implementing a schroeder reverberator
-  
-  
+
+
+
 ## Additional Links and Reading Material
 
 Throughout my embedded audio explorations, I found the following resources helpful.  I hope you find them useful as well:  
