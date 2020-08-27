@@ -23,8 +23,7 @@ DelayLine *createDelayLine(size_t M)
 			return NULL;
 		}
 
-		for (int i = 0; i < M; ++i)
-			d->buffer[i] = 0;
+		arm_fill_f32(0.f, d->buffer, M);
 	}
 	else
 		d->buffer = NULL;

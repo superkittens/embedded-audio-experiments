@@ -10,10 +10,8 @@
 #include "CombFilter.h"
 
 #define NUM_BUFFERS 4
-#define BUFFER_SIZE 4096
+#define BUFFER_SIZE 2048
 #define QUEUE_SIZE (NUM_BUFFERS)
-
-#define NUM_FILTER_COEFFS 9
 
 #define NUM_APCFS 3
 #define NUM_FBCFS 4
@@ -38,11 +36,11 @@ volatile static uint32_t dacQueueTail = QUEUE_SIZE - 1;
 volatile uint32_t adcBufferIndex;
 volatile uint32_t dacBufferIndex;
 
-float32_t fs = 40000.f;
+float32_t fs = 30000.f;
 
 
 //	Declare comb filters and parameters for Schroeder Reverberator
-APCF_T2 *ap[NUM_APCFS];
+APCF *ap[NUM_APCFS];
 FBCF *fb[NUM_FBCFS];
 
 size_t APDelayLengths[NUM_APCFS] = {347, 113, 37};
@@ -137,12 +135,12 @@ void transferBufferToQueue(volatile float32_t *outgoingBuffer, volatile float32_
 
 
 //	Function to shift in a sample into the Schroeder Reverberator and get the next output
-inline int shiftSchroederReverberator(float32_t *x, float32_t *y)
+int shiftSchroederReverberator(float32_t *x, float32_t *y)
 {
 	//	Shift in the audio input into the APCF section
 	float32_t filterInput = *x;
 	for (int i = 0; i < NUM_APCFS; ++i)
-		apcfT2Shift(ap[i], filterInput, &filterInput);
+		apcfShift(ap[i], filterInput, &filterInput);
 
 	//	Shift in result of the APCF section to the FBCF bank
 	//	Also apply the mixing matrix to the output of the FBCF bank
@@ -165,7 +163,7 @@ inline int shiftSchroederReverberator(float32_t *x, float32_t *y)
 void deleteSchroederReverberatorFilters()
 {
 	for (int i = 0; i < NUM_APCFS; ++i)
-		deleteAPCFT2(ap[i]);
+		deleteAPCF(ap[i]);
 
 	for (int i = 0; i < NUM_FBCFS; ++i)
 		deleteFBCF(fb[i]);
@@ -204,7 +202,7 @@ int main(void)
   //	Allocate and initialize the comb filters here
   for (int i = 0; i < NUM_APCFS; ++i)
   {
-	  ap[i] = createAPCFT2(APDelayLengths[i], -APGain, APGain);
+	  ap[i] = createAPCF(APDelayLengths[i], -APGain, APGain);
 	  if (ap[i] == NULL)
 	  {
 		  deleteSchroederReverberatorFilters();

@@ -34,6 +34,11 @@ Implementing a simple time-domain low pass Finite Impulse Response Filter
 [Silly Audio Processing 6](https://www.meoworkshop.org/silly-audio-processing-6/)  
 [Silly Audio Processing 7](https://www.meoworkshop.org/silly-audio-processing-7/)  
 Implementing delay lines and comb filters (feed-forward, feedback and all-pass)
+
+
+### Schroeder Reverberator
+[Silly Audio Processing 8](https://www.meoworkshop.org/silly-audio-processing-8/)
+Implementing a schroeder reverberator
   
   
 ## Additional Links and Reading Material
